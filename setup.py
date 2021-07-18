@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name='iota-exrate-manager',
-    version='0.1.0',    
+    version='0.1.1',    
     description='Python package that keeps track of iota prices via various APIs and converts prices',
     url='https://github.com/F-Node-Karlsruhe/iota-exrate-manager',
     author='F-Node-Karlsruhe',

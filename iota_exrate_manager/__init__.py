@@ -3,7 +3,7 @@ iota-exrate-manager
 Python package that keeps track of iota prices via various APIs and converts prices.
 """
 
-__version__ = "0.1.0"
+__version__ = "0.1.1"
 __author__ = 'F-Node-Karlsruhe'
 
 from .apis import coingecko, cmc
