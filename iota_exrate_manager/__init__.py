@@ -1,4 +1,12 @@
-from .apis import cmc
+"""
+iota-exrate-manager
+Python package that keeps track of iota prices via various APIs and converts prices.
+"""
+
+__version__ = "0.1.0"
+__author__ = 'F-Node-Karlsruhe'
+
+from .apis import coingecko, cmc
 from datetime import datetime, timedelta
 import sched
 import time
@@ -14,6 +22,18 @@ class ExRateManager:
     _apis = {'coinmarketcap', 'coingecko'}
 
     _last_updated = None
+
+    """Create a ExRateManager.
+    :param refresh_rate: Refresh rate in seconds.
+                         Default 60
+    :param delay_threshold: After which time without a successful refresh a warning is emitted
+                            in minutes.
+                            Default 5
+    :param currencies: List of currencies quotes for iota which are fetched.
+                       Default ['usd']
+    :param cmc_api_key: The coinmarketcap API key to fetch the cmc API.
+                        Default None
+    """
 
     def __init__(self,
                 refresh_rate=60,
@@ -51,12 +71,10 @@ class ExRateManager:
 
 
     def __refresh(self):
-
-        print('refreshing')
         
         if 'coinmarketcap' in self._apis:
 
-            cmc_exrates = apis.cmc(self._currencies, self._cmc_api_key)
+            cmc_exrates = cmc(self._currencies, self._cmc_api_key)
 
             if cmc_exrates:
 
@@ -65,7 +83,7 @@ class ExRateManager:
                 return
 
         # use coingecko as default   
-        cg_exrates = apis.coingecko(self._currencies)
+        cg_exrates = coingecko(self._currencies)
 
         if cg_exrates:
 
@@ -94,6 +112,9 @@ class ExRateManager:
 
 
     def up_to_date(self):
+        '''
+        Returns true if the last update was not longer ago than the specified threshold
+        '''
 
         if self._last_updated:
 
@@ -103,6 +124,9 @@ class ExRateManager:
 
 
     def iota_to_fiat(self, amount, currency=None, decimal_digits=2):
+        '''
+        Converts an iota amount into the requested currency
+        '''
 
         if currency is None:
 
@@ -116,6 +140,9 @@ class ExRateManager:
 
 
     def fiat_to_iota(self, amount, currency=None):
+        '''
+        Converts an amount of the specified currency into iota
+        '''
 
         if currency is None:
 
