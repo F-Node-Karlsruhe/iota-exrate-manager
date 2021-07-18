@@ -2,8 +2,8 @@ from setuptools import setup
 
 setup(
     name='iota-exrate-manager',
-    version='0.1.5',    
-    description='A thread safe, stateless python package that manages your receiving dust address',
+    version='0.1.0',    
+    description='Python package that keeps track of iota prices via various APIs and converts prices',
     url='https://github.com/F-Node-Karlsruhe/iota-exrate-manager',
     author='F-Node-Karlsruhe',
     author_email='contact@f-node.de',
