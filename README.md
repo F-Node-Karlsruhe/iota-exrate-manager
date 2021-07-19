@@ -1,3 +1,4 @@
+[![Downloads](https://pepy.tech/badge/iota-exrate-manager)](https://pepy.tech/project/iota-exrate-manager)  
 # iota-exrate-manager
 Python package that keeps track of iota exchange rates via various APIs and converts prices.
 
@@ -11,7 +12,7 @@ pip install iota-exrate-manager
 from iota_exrate_manager import ExRateManager
 import time
 
-# default currency is usd and the default refresh period is 60 seconds
+# default currency is usd and the default refresh period is 300 seconds
 em = ExRateManager()
 
 # give time to fetch
