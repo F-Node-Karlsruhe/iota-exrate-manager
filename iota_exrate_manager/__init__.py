@@ -1,9 +1,9 @@
 """
 iota-exrate-manager
-Python package that keeps track of iota prices via various APIs and converts prices.
+Python package that keeps track of iota exchange rates via various APIs and converts prices
 """
 
-__version__ = "0.1.1"
+__version__ = "0.1.2"
 __author__ = 'F-Node-Karlsruhe'
 
 from .apis import coingecko, cmc
@@ -25,10 +25,10 @@ class ExRateManager:
 
     """Create a ExRateManager.
     :param refresh_rate: Refresh rate in seconds.
-                         Default 60
+                         Default 300
     :param delay_threshold: After which time without a successful refresh a warning is emitted
-                            in minutes.
-                            Default 5
+                            in times refresh rate.
+                            Default 3
     :param currencies: List of currencies quotes for iota which are fetched.
                        Default ['usd']
     :param cmc_api_key: The coinmarketcap API key to fetch the cmc API.
@@ -36,8 +36,8 @@ class ExRateManager:
     """
 
     def __init__(self,
-                refresh_rate=60,
-                delay_threshold=5,
+                refresh_rate=300,
+                delay_threshold=3,
                 currencies=['usd'],
                 cmc_api_key=None):
 
@@ -118,7 +118,7 @@ class ExRateManager:
 
         if self._last_updated:
 
-            return datetime.utcnow() < self._last_updated + timedelta(minutes=self._delay_threshold)
+            return datetime.utcnow() < self._last_updated + timedelta(seconds=self._delay_threshold * self._refresh_rate)
 
         return False
 
